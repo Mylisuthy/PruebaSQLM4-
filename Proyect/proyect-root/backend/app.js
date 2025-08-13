@@ -8,9 +8,7 @@ const validator = require('validator')
 const helmet = require('helmet')
 
 // API ROUTES
-const usersRouter = require('./apy/users')
 const estudiantesRouter = require('./apy/Masive')
-const cursosRouter = require('./apy/cursos')
 const genericRouter = require('./apy/Conect')
 
 const app = express();
@@ -55,10 +53,10 @@ app.use('/api/generic', authMiddleware, genericRouter)
 // Endpoint de métricas (ejemplo)
 app.get('/api/metrics', authMiddleware, async (req, res) => {
   const supabase = require('./supabase_client')
-  // Total de estudiantes
-  const { count: totalEstudiantes } = await supabase.from('customer').select('*', { count: 'exact', head: true })
-  // Total de cursos
-  const { count: totalCursos } = await supabase.from('bill').select('*', { count: 'exact', head: true })
+  // all customers
+  const { count: allCustomer } = await supabase.from('customer').select('*', { count: 'exact', head: true })
+  // all bill
+  const { count: allBill } = await supabase.from('bill').select('*', { count: 'exact', head: true })
   res.json({ totalEstudiantes, totalCursos })
 });
 
@@ -72,3 +70,4 @@ const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
   console.log(`Servidor backend escuchando en puerto ${PORT}`)
 });
+
