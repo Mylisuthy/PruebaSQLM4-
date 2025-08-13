@@ -1,56 +1,67 @@
-# Proyecto Full Stack
+# Full Stack Project
 
-## Carga masiva de datos
+## Bulk Data Upload
 
-se intento lograr su funcionamiento pero fue imposible encriptar el error
+An attempt was made to implement this functionality, but the error could not be encrypted.
 
-## Seguridad
+## Security
 
-- Todas las rutas protegidas requieren JWT.
-- Validación y sanitización de entradas en backend y frontend.
-- Políticas RLS activas en la base de datos.
-- Se recomienda usar HTTPS y restringir CORS en producción.
+- All protected routes require JWT.
+- Input validation and sanitization on both backend and frontend.
+- RLS policies enabled in the database.
+- It is recommended to use HTTPS and restrict CORS in production.
 
-## Seguridad avanzada
+## Advanced Security
 
-- **CORS**: Solo permite solicitudes desde el frontend configurado.
-- **Helmet**: Añade cabeceras HTTP seguras.
-- **XSS**: Se rechazan payloads con `<script>` en el backend.
-- **CSRF**: Se recomienda usar tokens CSRF si se usan cookies/sesiones.
-- **RLS**: Políticas de Row Level Security activas en la base de datos.
-- **Validación y sanitización**: Todas las entradas se validan en backend y frontend.
+- **CORS**: Only allows requests from the configured frontend.
+- **Helmet**: Adds secure HTTP headers.
+- **XSS**: Payloads containing `<script>` are rejected in the backend.
+- **CSRF**: It is recommended to use CSRF tokens when using cookies/sessions.
+- **RLS**: Row Level Security policies are active in the database.
+- **Validation and Sanitization**: All inputs are validated in both backend and frontend.
 
-## Estructura
+## Structure
 
-- `/backend/apy/Masive.js`: Endpoint `/bulk` para carga masiva.
-- `/frontend/src/js/csv_upload.js`: Lógica de carga y validación de CSV.
+- `/backend/apy/Masive.js`: `/bulk` endpoint for bulk uploads.
+- `/frontend/src/js/csv_upload.js`: Logic for uploading and validating CSV files.
 
-## Recomendaciones de despliegue
+## Deployment Recommendations
 
-- Usar HTTPS en producción.
-- Configurar variables de entorno seguras.
-- Revisar y ajustar las políticas RLS según el dominio.
+- Use HTTPS in production.
+- Configure secure environment variables.
+- Review and adjust RLS policies according to the domain.
 
-## Pruebas extremas recomendadas
+## Recommended Stress Tests
 
-- **Carga masiva con datos corruptos:**  
-  Subir un CSV con campos vacíos, fechas mal formateadas o duplicados. El backend debe rechazar los registros inválidos y mostrar el error correspondiente.
-- **Inyección de scripts en formularios:**  
-  Intentar enviar `<script>alert(1)</script>` en cualquier campo de texto. El backend debe rechazar el payload y el frontend debe sanitizar la entrada.
-- **Carga masiva con más de 1000 registros:**  
-  Verificar que el sistema maneje correctamente grandes volúmenes y reporte errores si se supera el límite permitido.
+- **Bulk upload with corrupted data:**  
+  Upload a CSV with empty fields, incorrectly formatted dates, or duplicates. The backend should reject invalid records and display the corresponding error.
+- **Script injection in forms:**  
+  Try submitting `<script>alert(1)</script>` in any text field. The backend should reject the payload, and the frontend should sanitize the input.
+- **Bulk upload with more than 1000 records:**  
+  Verify that the system handles large volumes correctly and returns an error if the allowed limit is exceeded.
 
-## Seguridad en el frontend
+## Frontend Security
 
-- **Sanitización de entradas:**  
-  Utiliza funciones de escape en los formularios antes de enviar datos al backend.
-- **Almacenamiento seguro del token:**  
-  El token JWT se guarda en `localStorage` y se envía solo por header Authorization.
-- **Protección XSS:**  
-  Nunca insertes datos del usuario directamente en el DOM sin sanitizar.
+- **Input sanitization:**  
+  Use escape functions in forms before sending data to the backend.
+- **Secure token storage:**  
+  The JWT token is stored in `localStorage` and sent only via the Authorization header.
+- **XSS Protection:**  
+  Never insert user data directly into the DOM without sanitizing it.
 - **CORS:**  
-  El backend solo acepta solicitudes del dominio frontend configurado.
+  The backend only accepts requests from the configured frontend domain.
 
-**Nombre:** juan david gonzalez hincapie
-**clan:** linus
-**correo:** juanch052048@gmail.com
+## Quick Start
+
+Run `npm install` in both frontend and backend.
+
+Create a `.env` file in the backend to connect to Supabase:
+```
+SUPABASE_URL= the connection URL
+SUPABASE_SERVICE_ROLE= Supabase service role
+JWT_SECRET= the secret
+```
+
+**Name:** Juan David Gonzalez Hincapie  
+**Clan:** Linus  
+**Email:** juanch052048@gmail.com
