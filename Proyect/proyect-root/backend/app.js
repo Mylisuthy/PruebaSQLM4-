@@ -50,7 +50,7 @@ app.use(express.json({
 app.use('/api/Masive', authMiddleware, estudiantesRouter)
 app.use('/api/generic', authMiddleware, genericRouter)
 
-// Endpoint de métricas (ejemplo)
+// Endpoint metriks
 app.get('/api/metrics', authMiddleware, async (req, res) => {
   const supabase = require('./supabase_client')
   // all customers
@@ -70,4 +70,5 @@ const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
   console.log(`Servidor backend escuchando en puerto ${PORT}`)
 });
+
 
